@@ -87,10 +87,4 @@ public class DispositivoEletronico {
             return "Consulta " + numeroConsulta + ": Consumo: " + consumo + " kWh, Horario: " + horario.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         }
     }
-
-    public static void main(String[] args) {
-        DispositivoEletronico dispositivo = new DispositivoEletronico("NomeDispositivo", "MarcaDispositivo");
-        dispositivo.registrarConsumo();
-        dispositivo.consultarConsumo();
-    }
 }
