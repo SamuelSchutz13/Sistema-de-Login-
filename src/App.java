@@ -31,7 +31,7 @@ public class App {
                     System.out.println("Saindo do sistema...");
                     return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opcao invalida");
             }
         }
     }
@@ -39,10 +39,10 @@ public class App {
     private static void menuAdministrador(Sistema sistema, Scanner scanner) {
         while (true) {
             System.out.println("### Menu do Administrador ###");
-            System.out.println("1. Adicionar Dispositivo Eletrônico");
-            System.out.println("2. Listar Dispositivos Eletrônicos");
-            System.out.println("3. Adicionar Usuário");
-            System.out.println("4. Listar Usuários");
+            System.out.println("1. Adicionar Dispositivo Eletronico");
+            System.out.println("2. Listar Dispositivos Eletronicos");
+            System.out.println("3. Adicionar Usuario");
+            System.out.println("4. Listar Usuarios");
             System.out.println("5. Logout");
 
             int opcao = scanner.nextInt();
@@ -61,9 +61,9 @@ public class App {
                     sistema.listarDispositivos();
                     break;
                 case 3:
-                    System.out.println("Digite o login do usuário:");
+                    System.out.println("Digite o login do usuario:");
                     String loginUsuario = scanner.nextLine();
-                    System.out.println("Digite a senha do usuário:");
+                    System.out.println("Digite a senha do usuario:");
                     String senhaUsuario = scanner.nextLine();
                     Usuario usuario = new Usuario(loginUsuario, senhaUsuario);
                     sistema.adicionarUsuario(usuario);
@@ -75,16 +75,16 @@ public class App {
                     sistema.logout();
                     return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opcao invalida!");
             }
         }
     }
 
     private static void menuUsuario(Sistema sistema, Scanner scanner) {
         while (true) {
-            System.out.println("### Menu do Usuário ###");
-            System.out.println("1. Adicionar Dispositivo Eletrônico");
-            System.out.println("2. Visualizar Dispositivos Eletrônicos");
+            System.out.println("### Menu do Usuario ###");
+            System.out.println("1. Adicionar Dispositivo Eletronico");
+            System.out.println("2. Visualizar Dispositivos Eletronicos");
             System.out.println("3. Visualizar Histórico de Consumo");
             System.out.println("4. Logout");
 
@@ -104,14 +104,14 @@ public class App {
                     sistema.listarDispositivos();
                     break;
                 case 3:
-                    System.out.println("Digite o índice do dispositivo para ver o histórico de consumo:");
+                    System.out.println("Digite o indice do dispositivo para ver o historico de consumo:");
                     int indice = scanner.nextInt();
                     scanner.nextLine();
                     DispositivoEletronico dispositivoSelecionado = sistema.getDispositivoByIndex(indice - 1); 
                     if (dispositivoSelecionado != null) {
                         sistema.visualizarHistoricoConsumo(dispositivoSelecionado);
                     } else {
-                        System.out.println("Dispositivo não encontrado!");
+                        System.out.println("Dispositivo nao encontrado");
                     }
                     break;
                 case 4:

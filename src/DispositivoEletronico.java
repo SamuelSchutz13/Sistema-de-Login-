@@ -33,7 +33,6 @@ public class DispositivoEletronico {
         LocalDateTime horaAtual = LocalDateTime.now();
         RegistroConsumo registro = new RegistroConsumo(consumo, horaAtual);
         historicoConsumo.add(registro);
-        System.out.println("Consumo registrado com sucesso para o dispositivo " + nome + ": " + consumo + " kWh");
     }
 
     @Override
@@ -42,18 +41,16 @@ public class DispositivoEletronico {
     }
 
     public void consultarConsumo() {
-        if (!historicoConsumo.isEmpty()) {
-            Random random = new Random();
-            RegistroConsumo registro = historicoConsumo.get(random.nextInt(historicoConsumo.size()));
-            
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            String horaFormatada = registro.getHorario().format(formatter);
-            
-            float consumo = Math.round(registro.getConsumo() * 100) / 100f;
-            
-            System.out.printf("Consulta de consumo para o dispositivo %s: Número aleatório: %.2f, Horário da consulta: %s%n", 
-                            nome, consumo, horaFormatada);
-        }
+        Random random = new Random();
+        float consumo = Math.round(random.nextFloat() * 1000 * 100) / 100f;
+        LocalDateTime horaAtual = LocalDateTime.now();
+        RegistroConsumo registro = new RegistroConsumo(consumo, horaAtual);
+        historicoConsumo.add(registro);
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String horaFormatada = horaAtual.format(formatter);
+        
+        System.out.println("Consumo: " + consumo + " kWh, Horario: " + horaFormatada);
     }
 
     public class RegistroConsumo {
@@ -75,7 +72,7 @@ public class DispositivoEletronico {
 
         @Override
         public String toString() {
-            return "Consumo: " + consumo + " kWh, Horário: " + horario;
+            return "Consumo: " + consumo + " kWh, Horario: " + horario;
         }
     }
 }

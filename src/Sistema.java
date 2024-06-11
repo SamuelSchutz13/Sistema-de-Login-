@@ -1,4 +1,3 @@
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,14 +74,14 @@ private boolean validarCredenciaisUsuario(String login, String senha) {
 
     public void adicionarUsuario(Usuario usuario) {
         usuarios.add(usuario);
-        System.out.println("Usuário adicionado com sucesso: " + usuario.getLogin());
+        System.out.println("Usuario adicionado com sucesso: " + usuario.getLogin());
     }
 
     public void listarUsuarios() {
         if (usuarios.isEmpty()) {
-            System.out.println("Nenhum usuário cadastrado.");
+            System.out.println("Nenhum usuario cadastrado.");
         } else {
-            System.out.println("### Usuários ###");
+            System.out.println("### Usuarios ###");
             for (Usuario usuario : usuarios) {
                 System.out.println("Login: " + usuario.getLogin());
             }
@@ -90,7 +89,6 @@ private boolean validarCredenciaisUsuario(String login, String senha) {
     }
 
     public void visualizarHistoricoConsumo(DispositivoEletronico dispositivo) {
-        System.out.println("Consulta de consumo para o dispositivo " + dispositivo.getNome() + ": Número aleatório: " + Math.random() + ", Horário da consulta: " + LocalDateTime.now());
         dispositivo.consultarConsumo();
     }
 
@@ -99,7 +97,7 @@ private boolean validarCredenciaisUsuario(String login, String senha) {
         if (dispositivo != null) {
             dispositivo.registrarConsumo();
         } else {
-            System.out.println("Dispositivo não encontrado!");
+            System.out.println("Dispositivo nao encontrado");
         }
     }
 }
