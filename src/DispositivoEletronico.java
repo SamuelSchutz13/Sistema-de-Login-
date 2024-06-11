@@ -8,11 +8,13 @@ public class DispositivoEletronico {
     private String nome;
     private String marca;
     private List<RegistroConsumo> historicoConsumo;
+    private int contadorConsultas;
 
     public DispositivoEletronico(String nome, String marca) {
         this.nome = nome;
         this.marca = marca;
         this.historicoConsumo = new ArrayList<>();
+        this.contadorConsultas = 0;
     }
 
     public String getNome() {
@@ -31,8 +33,25 @@ public class DispositivoEletronico {
         Random random = new Random();
         float consumo = Math.round(random.nextFloat() * 1000 * 100) / 100f;
         LocalDateTime horaAtual = LocalDateTime.now();
-        RegistroConsumo registro = new RegistroConsumo(consumo, horaAtual);
+        RegistroConsumo registro = new RegistroConsumo(++contadorConsultas, consumo, horaAtual);
         historicoConsumo.add(registro);
+        mostrarHistoricoConsumo();
+    }
+
+    public void consultarConsumo() {
+        Random random = new Random();
+        float consumo = Math.round(random.nextFloat() * 1000 * 100) / 100f;
+        LocalDateTime horaAtual = LocalDateTime.now();
+        RegistroConsumo registro = new RegistroConsumo(++contadorConsultas, consumo, horaAtual);
+        historicoConsumo.add(registro);
+        mostrarHistoricoConsumo();
+    }
+
+    public void mostrarHistoricoConsumo() {
+        System.out.println("Histórico de consumo para o dispositivo " + nome + ":");
+        for (RegistroConsumo registro : historicoConsumo) {
+            System.out.println(registro);
+        }
     }
 
     @Override
@@ -40,26 +59,19 @@ public class DispositivoEletronico {
         return "Nome: " + nome + ", Marca: " + marca;
     }
 
-    public void consultarConsumo() {
-        Random random = new Random();
-        float consumo = Math.round(random.nextFloat() * 1000 * 100) / 100f;
-        LocalDateTime horaAtual = LocalDateTime.now();
-        RegistroConsumo registro = new RegistroConsumo(consumo, horaAtual);
-        historicoConsumo.add(registro);
-        
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String horaFormatada = horaAtual.format(formatter);
-        
-        System.out.println("Consumo: " + consumo + " kWh, Horario: " + horaFormatada);
-    }
-
     public class RegistroConsumo {
+        private int numeroConsulta;
         private float consumo;
         private LocalDateTime horario;
 
-        public RegistroConsumo(float consumo, LocalDateTime horario) {
+        public RegistroConsumo(int numeroConsulta, float consumo, LocalDateTime horario) {
+            this.numeroConsulta = numeroConsulta;
             this.consumo = consumo;
             this.horario = horario;
+        }
+
+        public int getNumeroConsulta() {
+            return numeroConsulta;
         }
 
         public float getConsumo() {
@@ -72,7 +84,13 @@ public class DispositivoEletronico {
 
         @Override
         public String toString() {
-            return "Consumo: " + consumo + " kWh, Horario: " + horario;
+            return "Consulta " + numeroConsulta + ": Consumo: " + consumo + " kWh, Horario: " + horario.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         }
+    }
+
+    public static void main(String[] args) {
+        DispositivoEletronico dispositivo = new DispositivoEletronico("NomeDispositivo", "MarcaDispositivo");
+        dispositivo.registrarConsumo();
+        dispositivo.consultarConsumo();
     }
 }

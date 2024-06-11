@@ -47,7 +47,7 @@ private boolean validarCredenciaisUsuario(String login, String senha) {
             return true; 
         }
     }
-    return false; // As credenciais são inválidas
+    return false; 
 }
     public void adicionarDispositivo(DispositivoEletronico dispositivo) {
         dispositivos.add(dispositivo);
